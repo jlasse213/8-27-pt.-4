@@ -63,15 +63,15 @@ function checkAnswer(isYes) {
 function showSolution() {
   document.getElementById('tryAgain').textContent = '';
   document.getElementById('expander').classList.add('open');
-  // Solution in LaTeX
-  const eqLatex = `y = ${currentLine.m === 1 ? '' : currentLine.m === -1 ? '-' : currentLine.m}x ${currentLine.b >= 0 ? '+' : ''} ${currentLine.b}`;
-    const ptLatex = `(${currentPoint.x}, ${currentPoint.y})`;
+  // Solution in plain text (no LaTeX)
+  const eqText = `y = ${currentLine.m === 1 ? '' : currentLine.m === -1 ? '-' : currentLine.m}x ${currentLine.b >= 0 ? '+' : ''} ${currentLine.b}`;
+  const ptText = `(${currentPoint.x}, ${currentPoint.y})`;
   const yCalc = currentLine.m * currentPoint.x + currentLine.b;
-  const solutionLatex = `To check if $${ptLatex}$ is on $${eqLatex}$, substitute $x = ${currentPoint.x}$ into the equation:<br>
-  $y = ${currentLine.m} \times ${currentPoint.x} ${currentLine.b >= 0 ? '+' : ''} ${currentLine.b} = ${yCalc}$<br>
-  Since $y = ${currentPoint.y}$, this is ${yCalc === currentPoint.y ? '\\text{true}' : '\\text{false}'}!`;
-  document.getElementById('solution').innerHTML = solutionLatex;
-  renderMath();
+  const isTrue = yCalc === currentPoint.y;
+  const solutionText = `To check if ${ptText} is on ${eqText}, substitute x = ${currentPoint.x} into the equation:<br>
+  y = ${currentLine.m} × ${currentPoint.x} ${currentLine.b >= 0 ? '+' : ''} ${currentLine.b} = ${yCalc}<br>
+  Since y = ${currentPoint.y}, this is ${isTrue ? 'true' : 'false'}!`;
+  document.getElementById('solution').innerHTML = solutionText;
   drawGraph();
 }
 
